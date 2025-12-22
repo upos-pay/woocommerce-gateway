@@ -1,0 +1,415 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: UPOS Payments for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/upos-pay/woocommerce-gateway\n"
+"Last-Translator: UPOS <admin@upos.fi>\n"
+"Language-Team: UPOS <admin@upos.fi>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-12-23 00:00+0000\n"
+"PO-Revision-Date: 2025-12-23 00:00+0000\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: upos-woocommerce\n"
+
+msgid "UPOS Payments requires PHP 7.4 or higher. Your current version is %s"
+msgstr "UPOS 支付閘道需要 PHP 7.4 或更高版本，您目前的版本是 %s"
+
+msgid "UPOS Payments requires WooCommerce to be installed and active."
+msgstr "UPOS 支付閘道需要 WooCommerce 才能運作，請先安裝並啟用 WooCommerce"
+
+msgid "Loading payment options..."
+msgstr "載入付款選項中..."
+
+msgid "Select Payment Currency"
+msgstr "選擇付款幣種"
+
+msgid "Select Payment Network"
+msgstr "選擇付款網路"
+
+msgid "Unable to load payment options"
+msgstr "無法載入付款選項"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "UPOS Payments"
+msgstr "UPOS 支付"
+
+msgid "UPOS"
+msgstr "UPOS"
+
+msgid "Accept cryptocurrency payments via UPOS"
+msgstr "透過 UPOS 接受加密貨幣付款"
+
+msgid "Enable/Disable"
+msgstr "啟用/停用"
+
+msgid "Enable UPOS Payments"
+msgstr "啟用 UPOS Payments"
+
+msgid "Public Key"
+msgstr "Public Key"
+
+msgid "UPOS Public Key (pk_test_xxx or pk_live_xxx)"
+msgstr "UPOS Public Key (pk_test_xxx 或 pk_live_xxx)"
+
+msgid "Secret Key"
+msgstr "Secret Key"
+
+msgid "UPOS Secret Key (sk_test_xxx or sk_live_xxx)"
+msgstr "UPOS Secret Key (sk_test_xxx 或 sk_live_xxx)"
+
+msgid "Debug Log"
+msgstr "除錯日誌"
+
+msgid "Enable logging"
+msgstr "啟用日誌記錄"
+
+msgid "Log UPOS events to WooCommerce logs (%s)"
+msgstr "將 UPOS 事件記錄到 WooCommerce 日誌 (%s)"
+
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+msgid "Set this URL in UPOS backend to receive real-time payment notifications. This URL is also automatically sent with each order."
+msgstr "將此 URL 設定到 UPOS 後台，用於接收即時付款通知。每筆訂單也會自動帶入此 URL。"
+
+msgid "Test Mode"
+msgstr "測試模式"
+
+msgid "Test mode is enabled. No real transactions will be processed."
+msgstr "目前為測試模式，不會產生實際交易"
+
+msgid "Please select a payment currency"
+msgstr "請選擇付款幣種"
+
+msgid "Please select a payment network"
+msgstr "請選擇付款網路"
+
+msgid "Order not found"
+msgstr "訂單不存在"
+
+msgid "UPOS: Payment intent created (ID: %1$s), %2$s (%3$s), redirecting to UPOS payment page"
+msgstr "UPOS: 已建立付款請求 (ID: %1$s)，%2$s (%3$s)，導向 UPOS 支付頁面"
+
+msgid "Unable to retrieve UPOS payment token"
+msgstr "無法取得 UPOS 支付 Token"
+
+msgid "Payment error: "
+msgstr "支付錯誤: "
+
+msgid "Payment Confirmed"
+msgstr "付款已確認"
+
+msgid "Thank you for your payment! Your order is being processed."
+msgstr "感謝您的付款！您的訂單正在處理中。"
+
+msgid "Payment Expired"
+msgstr "付款已逾期"
+
+msgid "The payment period for this order has expired. Please place a new order."
+msgstr "此訂單的付款期限已過，請重新下單。"
+
+msgid "Awaiting Payment Confirmation"
+msgstr "等待付款確認"
+
+msgid "Awaiting cryptocurrency payment confirmation."
+msgstr "等待加密貨幣付款確認。"
+
+msgid "Order status will update automatically after payment confirmation. This may take a few minutes."
+msgstr "付款確認後，訂單狀態將自動更新。這可能需要幾分鐘時間。"
+
+msgid "Using Test Environment Keys"
+msgstr "目前使用測試環境金鑰"
+
+msgid "Using Live Environment Keys"
+msgstr "目前使用正式環境金鑰"
+
+msgid "API Connection Test"
+msgstr "API 連線測試"
+
+msgid "Test Connection"
+msgstr "測試連線"
+
+msgid "Currently only USDT is supported for crypto payment."
+msgstr "目前僅支援 USDT 加密貨幣支付。"
+
+msgid "Unable to get exchange rate for payment. Please try again later."
+msgstr "無法取得支付匯率。請稍後再試。"
+
+msgid "Error: "
+msgstr "錯誤: "
+
+msgid "API URL"
+msgstr "API 網址"
+
+msgid "UPOS API Base URL (e.g., http://localhost:9001)"
+msgstr "UPOS API 基礎網址 (例如：http://localhost:9001)"
+
+msgid "Failed to load currencies"
+msgstr "無法載入幣種列表"
+
+msgid "Please select a currency and network"
+msgstr "請選擇幣種與網路"
+
+msgid "Test Mode Enabled"
+msgstr "測試模式已啟用"
+
+msgid "Missing Public Key"
+msgstr "缺少 Public Key"
+
+msgid "Select Currency"
+msgstr "選擇幣種"
+
+msgid "Select Network"
+msgstr "選擇網路"
+
+msgid "Every minute"
+msgstr "每分鐘"
+
+msgid "Every 30 seconds"
+msgstr "每 30 秒"
+
+msgid "Order synced successfully"
+msgstr "訂單同步成功"
+
+msgid "Order sync failed"
+msgstr "訂單同步失敗"
+
+msgid "UPOS Order status synced successfully."
+msgstr "UPOS 訂單狀態同步成功。"
+
+msgid "UPOS Order status sync failed."
+msgstr "UPOS 訂單狀態同步失敗。"
+
+msgid "UPOS API request failed"
+msgstr "UPOS API 請求失敗"
+
+msgid "UPOS Payment Details"
+msgstr "UPOS 付款詳情"
+
+msgid "Not a UPOS order."
+msgstr "非 UPOS 訂單"
+
+msgid "No payment details available yet."
+msgstr "尚無付款詳情"
+
+msgid "Status"
+msgstr "狀態"
+
+msgid "Payment Intent ID"
+msgstr "付款請求 ID"
+
+msgid "Payment Address"
+msgstr "付款地址"
+
+msgid "Currency / Network"
+msgstr "幣種 / 網路"
+
+msgid "Order Amount"
+msgstr "訂單金額"
+
+msgid "Received Amount"
+msgstr "已收金額"
+
+msgid "Expires At"
+msgstr "過期時間"
+
+msgid "Paid At"
+msgstr "付款時間"
+
+msgid "Last Disbursed At"
+msgstr "最後撥款時間"
+
+msgid "Disbursed Amount"
+msgstr "撥款金額"
+
+msgid "Sync Status Now"
+msgstr "立即同步狀態"
+
+msgid "Transaction History"
+msgstr "交易紀錄"
+
+msgid "You do not have permission to sync orders."
+msgstr "您沒有權限同步訂單"
+
+msgid "Testing connection..."
+msgstr "正在測試連線..."
+
+msgid "Please enter both Public Key and Secret Key."
+msgstr "請輸入 Public Key 和 Secret Key"
+
+msgid "Connection failed. Please check your network or API keys."
+msgstr "連線失敗，請檢查網路或 API Key"
+
+msgid "Permission denied"
+msgstr "權限不足"
+
+msgid "Settings changed. Please save changes before testing."
+msgstr "設定已變更，請先儲存設定再進行測試。"
+
+msgid "Connection successful! Both keys are valid."
+msgstr "連線成功！Public Key 與 Secret Key 皆有效。"
+
+msgid "Public Key must start with pk_test_ or pk_live_."
+msgstr "Public Key 必須以 pk_test_ 或 pk_live_ 開頭。"
+
+msgid "Secret Key must start with sk_test_ or sk_live_."
+msgstr "Secret Key 必須以 sk_test_ 或 sk_live_ 開頭。"
+
+msgid "Public Key and Secret Key environments do not match (Test/Live)."
+msgstr "Public Key 與 Secret Key 的環境不符 (測試/正式)。"
+
+msgid "Public Key and Secret Key must belong to the same environment (Test or Live)."
+msgstr "Public Key 與 Secret Key 必須屬於相同環境 (測試或正式)。"
+
+msgid "Public Key and Secret Key must belong to the same environment (Test or Live). Settings not saved."
+msgstr "Public Key 與 Secret Key 必須屬於相同環境 (測試或正式)，設定未儲存。"
+
+msgid "Missing API keys. Please save settings first."
+msgstr "缺少 API Key，請先儲存設定。"
+
+msgid "Connection failed due to an unexpected error."
+msgstr "連線失敗：發生未預期的錯誤。"
+
+msgid "UPOS: Abnormal payment detected. Received: %1$s, Expected: %2$s. Manual resolution required."
+msgstr "UPOS: 偵測到異常付款。收到: %1$s，預期: %2$s。需人工處理。"
+
+msgid "UPOS: Payment expired. Monitoring for late payments."
+msgstr "UPOS: 付款已逾期。正在監控延遲付款。"
+
+msgid "UPOS: Payment intent created."
+msgstr "UPOS: 已建立付款請求。"
+
+msgid "UPOS: Awaiting payment."
+msgstr "UPOS: 等待付款中。"
+
+msgid "UPOS: Payment confirmed."
+msgstr "UPOS: 付款已確認。"
+
+msgid "UPOS: Funds settled (disbursed)."
+msgstr "UPOS: 款項已結算 (已撥款)。"
+
+msgid "UPOS: Payment marked as abnormal."
+msgstr "UPOS: 付款標記為異常。"
+
+msgid "UPOS: Payment expired."
+msgstr "UPOS: 付款已逾期。"
+
+msgid "UPOS: Unknown status %s."
+msgstr "UPOS: 未知狀態 %s。"
+
+msgid "UPOS: Late payment received and confirmed. Order recovered from expiration."
+msgstr "UPOS: 收到並確認延遲付款。訂單已從逾期狀態恢復。"
+
+msgid "Created"
+msgstr "已建立"
+
+msgid "Awaiting Payment"
+msgstr "等待付款"
+
+msgid "Paid Confirmed"
+msgstr "付款已確認"
+
+msgid "Settled"
+msgstr "已結算"
+
+msgid "Expired"
+msgstr "已逾期"
+
+msgid "Abnormal"
+msgstr "異常"
+
+msgid "Processing..."
+msgstr "處理中..."
+
+msgid "Please wait a moment before trying again."
+msgstr "請稍候再試。"
+
+msgid "Please wait 30 seconds between syncs."
+msgstr "請等待 30 秒後再進行同步。"
+
+msgid "Sync task is currently running. Please wait."
+msgstr "同步任務正在執行中，請稍候。"
+
+msgid "Order sync completed successfully."
+msgstr "訂單同步已完成。"
+
+msgid "Please wait 1 minute between checks."
+msgstr "請等待 1 分鐘後再進行檢查。"
+
+msgid "Expiration check is currently running. Please wait."
+msgstr "過期檢查任務正在執行中，請稍候。"
+
+msgid "Expiration check completed successfully."
+msgstr "過期檢查已完成。"
+
+msgid "Tools & Diagnostics"
+msgstr "工具與診斷"
+
+msgid "API Connection"
+msgstr "API 連線"
+
+msgid "Verify that your API keys are correct and the UPOS server is reachable."
+msgstr "確認您的 API 金鑰正確且可連線至 UPOS 伺服器。"
+
+msgid "Scheduled Tasks"
+msgstr "排程任務"
+
+msgid "Order Sync Task"
+msgstr "訂單同步任務"
+
+msgid "Last Manual Run: %s"
+msgstr "上次手動執行時間: %s"
+
+msgid "Run Sync Now"
+msgstr "立即執行同步"
+
+msgid "Expiration Check Task"
+msgstr "過期檢查任務"
+
+msgid "Check Expired Now"
+msgstr "立即檢查過期"
+
+msgid "Tasks run automatically in the background. Use these buttons only if you need to force an immediate update."
+msgstr "任務會在背景自動執行。僅在需要強制立即更新時使用此按鈕。"
+
+msgid "Never"
+msgstr "從未執行"
+
+msgid "The payment period for this order has expired. If you have already made a payment, please be patient as blockchain synchronization may take some time. Rest assured, once the payment is confirmed, we will process your order immediately."
+msgstr "目前訂單尚未收到款項，且已經超過付款時間，如果你已經付款，可能需要等待區塊鏈同步，請放心，一旦確認款項會儘快幫你處理訂單"
+
+msgid "Payment confirmed. Please refresh the page to see your updated order status."
+msgstr "付款已確認。請重新整理頁面以查看更新後的訂單狀態。"
+
+msgid "We are awaiting your payment. If you have already paid, please wait a moment for the blockchain network to confirm."
+msgstr "我們正在等待您的付款。如果您已經付款，請稍候片刻等待區塊鏈網路確認。"
+
+msgid "An issue was detected with your payment (e.g., incorrect amount). Please contact support for assistance."
+msgstr "您的付款偵測到異常（例如：金額不符）。請聯絡客服尋求協助。"
+
+msgid "Payment confirmed. Please refresh the page or check your order status."
+msgstr "付款已確認，請重新整理頁面或檢查您的訂單狀態。"
+
+msgid "Awaiting cryptocurrency payment confirmation. Order status will update automatically after payment confirmation. This may take a few minutes."
+msgstr "等待加密貨幣付款確認。付款確認後，訂單狀態將自動更新，這可能需要幾分鐘時間。"
+
+msgid "Order created. Please select a payment method to proceed."
+msgstr "訂單已建立，請選擇付款方式以繼續。"
+
+msgid "The payment period for this order has expired. If you have already made a payment, please be patient as blockchain synchronization may take some time. If the payment is not confirmed after several hours, please contact customer support for assistance."
+msgstr "此訂單的付款期限已過。如果您已經付款，可能需要等待區塊鏈同步。若付款在數小時後仍未確認，請聯絡客服尋求協助。"
+
+msgid "An issue was detected with your payment (e.g., amount mismatch). Please contact support for assistance."
+msgstr "您的付款偵測到異常（例如：金額不匹配）。請聯絡客服尋求協助。"
+
+msgid "Order created. Please setup a payment method to proceed."
+msgstr "訂單已建立，請設定付款方式以繼續。"
+
+msgid "Please check the payment status details below."
+msgstr "請查看下方的付款狀態詳情。"
+
+msgid "Please enter your Public Key and Secret Key before enabling the gateway."
+msgstr "請在啟用前輸入 Public Key 與 Secret Key。"

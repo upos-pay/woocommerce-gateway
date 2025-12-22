@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<ruleset name="UPOS WooCommerce Custom">
+    <description>Custom PHPCS configuration for the UPOS WooCommerce plugin.</description>
+
+    <!-- Pass some command-line arguments to phpcs -->
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="s"/>
+
+    <!-- Only scan specific files and directories -->
+    <file>upos-woocommerce.php</file>
+    <file>uninstall.php</file>
+    <file>includes/</file>
+
+    <!--
+    Include the non-commenting parts of the WordPress standard.
+    Then, override specific rules.
+    -->
+    <rule ref="WordPress-Core">
+        <!-- Disable the tab indentation rule -->
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    </rule>
+    <rule ref="WordPress-Extra"/>
+
+    <!-- Set global indentation to 2 spaces. This will override the default in WordPress-Core. -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="2"/>
+            <property name="tabIndent" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- Disable the problematic WordPress array indentation and use the generic one instead -->
+    <rule ref="WordPress.Arrays.ArrayIndentation">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Arrays.ArrayIndent">
+        <properties>
+            <property name="indent" value="2"/>
+        </properties>
+    </rule>
+
+    <!-- This rule conflicts with space-based indentation for aligned arrays -->
+    <rule ref="WordPress.Arrays.MultipleStatementAlignment">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Disable generic multiple statement alignment to allow manual alignment -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Strictly disallow tabs -->
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+
+    <!-- Disable conflicting or unwanted rules -->
+    <rule ref="PEAR.Functions.FunctionCallSignature">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Disable all comment-related sniffs -->
+    <rule ref="Squiz.Commenting">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Commenting">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Disable specific Universal rules that are too strict for this project -->
+    <rule ref="Universal.PHP.RequireExitDieParentheses">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.FunctionDeclarations.NoLongClosures">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Classes.RequireFinalClass">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Arrays.MixedArrayKeyTypes">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Arrays.MixedKeyedUnkeyedArray">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.ControlStructures.IfElseDeclaration">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.UseStatements.DisallowUseClass">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.Operators.StrictComparisons">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Universal.WhiteSpace.PrecisionAlignment">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Add custom capabilities to the whitelist -->
+    <rule ref="WordPress.WP.Capabilities">
+        <properties>
+            <property name="custom_capabilities" type="array">
+                <element value="manage_woocommerce"/>
+                <element value="edit_shop_orders"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Disable the cron interval warning -->
+    <rule ref="WordPress.WP.CronInterval.CronSchedulesInterval">
+        <severity>0</severity>
+    </rule>
+
+</ruleset>
