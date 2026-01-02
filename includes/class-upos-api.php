@@ -82,6 +82,7 @@ class UPOS_Api {
    *
    * @param array $data Payment intent data.
    *          - orderId: (string) Merchant's order ID
+   *          - currency: (string) Request currency (e.g. 'USD', 'USDT')
    *          - amount: (string) Payment amount
    *          - paymentMethod: (array) { type: 'crypto_tron', currency: 'usdt' }
    *          - returnUrl: (string) URL to redirect after payment
@@ -91,19 +92,30 @@ class UPOS_Api {
    *               - 'paymentUrl': (string) Full URL to UPOS payment page.
    *               - 'intent': (array) An array with payment intent details:
    *                 - 'id': (string) Payment intent ID (pi_xxx).
+   *                 - 'mode': (string) 'live' or 'test'.
    *                 - 'orderId': (string).
-   *                 - 'orderAmount': (string).
+   *                 - 'requestAmount': (string).
+   *                 - 'requestCurrency': (string).
+   *                 - 'exchangeRate': (string).
+   *                 - 'subtotalAmount': (string).
    *                 - 'paymentAmount': (string).
+   *                 - 'netAmount': (string).
+   *                 - 'buyerFee': (string).
+   *                 - 'sellerFee': (string).
+   *                 - 'feeRules': (array) { buyer: {min, rate}, seller: {base, rate, threshold} }.
    *                 - 'paymentMethod': (array|null) containing type, currency, network, address.
    *                 - 'status': (string).
    *                 - 'returnUrl': (string|null).
+   *                 - 'paidAt': (int|null) epoch ms.
    *                 - 'expiredAt': (int|null) epoch ms.
    *                 - 'createdAt': (int) epoch ms.
+   *                 - 'updatedAt': (int) epoch ms.
    * @throws Exception If API request fails.
    */
   public function create_payment_intent( $data ) {
     $payload = array(
       'orderId'       => (string) $data['orderId'],
+      'currency' => (string) $data['currency'],
       'amount'        => (string) $data['amount'],
       'paymentMethod' => $data['paymentMethod'],
     );
@@ -127,12 +139,17 @@ class UPOS_Api {
    * @param string $payment_intent_id Payment intent ID (pi_xxx).
    * @return array An array containing the payment intent details, including keys like:
    *               - id
+   *               - mode
    *               - orderId
-   *               - orderAmount
+   *               - requestAmount
+   *               - requestCurrency
+   *               - exchangeRate
+   *               - subtotalAmount
    *               - paymentAmount
    *               - netAmount
    *               - buyerFee
    *               - sellerFee
+   *               - feeRules
    *               - paymentMethod
    *               - receivedAmount
    *               - status

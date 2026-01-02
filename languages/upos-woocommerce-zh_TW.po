@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: UPOS Payments for WooCommerce 1.0.0\n"
+"Project-Id-Version: UPOS Payments for WooCommerce 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/upos-pay/woocommerce-gateway\n"
 "Last-Translator: UPOS <admin@upos.fi>\n"
 "Language-Team: UPOS <admin@upos.fi>\n"
@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-12-23 00:00+0000\n"
-"PO-Revision-Date: 2025-12-23 00:00+0000\n"
+"PO-Revision-Date: 2026-01-02 18:23+0800\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: upos-woocommerce\n"
 
@@ -413,3 +413,33 @@ msgstr "請查看下方的付款狀態詳情。"
 
 msgid "Please enter your Public Key and Secret Key before enabling the gateway."
 msgstr "請在啟用前輸入 Public Key 與 Secret Key。"
+
+msgid "User Payable"
+msgstr "用戶應付"
+
+msgid "Buyer Fee"
+msgstr "買家手續費"
+
+msgid "Product Price"
+msgstr "商品價格"
+
+msgid "Seller Fee"
+msgstr "商家手續費"
+
+msgid "Merchant Receivable"
+msgstr "商家應收"
+
+msgid "Current Received"
+msgstr "目前收款"
+
+msgid "Payment Type"
+msgstr "付款類型"
+
+msgid "Tx"
+msgstr "交易雜湊 (Tx)"
+
+msgid "Request Amount"
+msgstr "請求金額"
+
+msgid "Subtotal Amount"
+msgstr "小計金額"

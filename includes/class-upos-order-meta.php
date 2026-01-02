@@ -25,7 +25,9 @@ defined( 'ABSPATH' ) || exit;
  * - _upos_fiat_amount         : The original order total in fiat currency as set by the merchant (e.g., TWD, USD).
  * - _upos_fiat_currency       : The fiat currency for the original order total (e.g., 'TWD', 'USD').
  * - _upos_exchange_rate       : The exchange rate used for the fiat-to-USDT conversion (1 USDT = X of fiat_currency).
- * - _upos_order_amount        : The target order amount in USDT, converted from the fiat amount. This is the order_amount sent to UPOS to be collected.
+ * - _upos_request_currency    : The requested currency (e.g., 'USD', 'USDT').
+ * - _upos_request_amount      : The original requested amount (in request_currency).
+ * - _upos_subtotal_amount     : The subtotal amount (replacing order_amount).
  * - _upos_payment_amount      : Amount to be paid by buyer.
  * - _upos_net_amount          : Net amount settled to merchant.
  * - _upos_buyer_fee           : Fee paid by buyer.
@@ -56,7 +58,9 @@ class UPOS_Order_Meta {
     'payment_address',
     'raw_status',
     'logic_status',
-    'order_amount',
+    'request_currency',
+    'request_amount',
+    'subtotal_amount',
     'payment_amount',
     'net_amount',
     'buyer_fee',
@@ -183,7 +187,8 @@ class UPOS_Order_Meta {
    *   data: {
    *     id: "pi_xxx",
    *     orderId: "...",
-   *     orderAmount: "100.00",
+   *     requestAmount: "...",
+   *     subtotalAmount: "...",
    *     paymentAmount: "102.00",
    *     paymentMethod: { type, currency, network, address } | null,
    *     status: "created",
@@ -210,7 +215,9 @@ class UPOS_Order_Meta {
       'payment_intent_id'   => $intent['id'] ?? '',
       'raw_status'          => $intent['status'] ?? UPOS_Constants::STATUS_CREATED,
       'logic_status'        => $intent['status'] ?? UPOS_Constants::STATUS_CREATED,
-      'order_amount'        => $intent['orderAmount'] ?? '',
+      'request_amount'      => $intent['requestAmount'] ?? '',
+      'request_currency'    => $intent['requestCurrency'] ?? '',
+      'subtotal_amount'     => $intent['subtotalAmount'] ?? '',
       'payment_amount'      => $payment_amount,
       'net_amount'          => $intent['netAmount'] ?? '',
       'buyer_fee'           => $intent['buyerFee'] ?? '',
@@ -242,7 +249,7 @@ class UPOS_Order_Meta {
    *
    * Response format:
    * {
-   *   id, orderId, orderAmount, paymentAmount, paymentMethod, receivedAmount, status,
+   *   id, orderId, requestAmount, subtotalAmount, paymentAmount, paymentMethod, receivedAmount, status,
    *   returnUrl, events, statusHistory, disbursements,
    *   expiredAt, paidAt, settledAt, createdAt, updatedAt
    * }
@@ -287,11 +294,13 @@ class UPOS_Order_Meta {
     $updates['received_amount'] = $new_received;
 
     // Also sync the target amount, just in case it changed (though unlikely)
-    $updates['order_amount']   = $intent['orderAmount'] ?? null;
+    $updates['request_amount'] = $intent['requestAmount'] ?? null;
+    $updates['request_currency'] = $intent['requestCurrency'] ?? null;
+    $updates['subtotal_amount'] = $intent['subtotalAmount'] ?? null;
     $updates['payment_amount'] = $intent['paymentAmount'] ?? null;
-    $updates['net_amount']     = $intent['netAmount'] ?? null;
-    $updates['buyer_fee']      = $intent['buyerFee'] ?? null;
-    $updates['seller_fee']     = $intent['sellerFee'] ?? null;
+    $updates['net_amount'] = $intent['netAmount'] ?? null;
+    $updates['buyer_fee'] = $intent['buyerFee'] ?? null;
+    $updates['seller_fee'] = $intent['sellerFee'] ?? null;
 
     // 2. Timestamps - Sync directly (null means not happened yet or cleared)
     $updates['expired_at'] = $intent['expiredAt'] ?? null;

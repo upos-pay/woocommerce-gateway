@@ -43,7 +43,10 @@ export const WebhookEventType = {
   "data": {
     "id": "pi_xxx",
     "orderId": "ORD-12345",
-    "orderAmount": "100.000000",
+    "requestAmount": "100.000000",
+    "requestCurrency": "USDT",
+    "exchangeRate": "1.00",
+    "subtotalAmount": "100.000000",
     "paymentAmount": "102.000000",
     "receivedAmount": "102.000000",
     "status": "paid_confirmed",
@@ -58,7 +61,10 @@ export const WebhookEventType = {
 | timestamp | number | Event timestamp (epoch ms) |
 | data.id | string | Payment intent ID (`pi_xxx`) |
 | data.orderId | string | Merchant's order ID |
-| data.orderAmount | string | Original order amount |
+| data.requestAmount | string | Original requested order amount |
+| data.requestCurrency | string | Request currency |
+| data.exchangeRate | string | Exchange rate |
+| data.subtotalAmount | string | Subtotal amount in payment currency |
 | data.paymentAmount | string | Amount to be paid by buyer |
 | data.receivedAmount | string | Amount received so far |
 | data.status | string | Current payment intent status |

@@ -549,85 +549,69 @@ class UPOS_Gateway extends WC_Payment_Gateway {
     };
 
     echo '<div class="upos-admin-details">';
-
-    // Status
+ 
     echo '<p><strong>' . esc_html__( 'Status', 'upos-woocommerce' ) . ':</strong> ';
     $status       = $meta['logic_status'] ?? 'unknown';
     $status_label = UPOS_Order_FSM::get_logic_status_label( $status );
     $status_class = 'upos-status-' . esc_attr( $status );
     echo '<span class="upos-status-badge ' . esc_attr( $status_class ) . '">' . esc_html( $status_label ) . '</span></p>';
 
-    // IDs
-    echo '<p><strong>' . esc_html__( 'Payment Intent ID', 'upos-woocommerce' ) . ':</strong><br>';
-    echo '<code>' . esc_html( $meta['payment_intent_id'] ) . '</code></p>';
+    echo '<p><strong>' . esc_html__('User Payable', 'upos-woocommerce') . ':</strong> ';
+    echo esc_html($meta['payment_amount'] ?? '0') . '</p>';
 
-    // Payment Info
-    echo '<p><strong>' . esc_html__( 'Payment Address', 'upos-woocommerce' ) . ':</strong><br>';
-    if ( ! empty( $meta['payment_address'] ) ) {
-        echo '<code style="word-break:break-all;">' . esc_html( $meta['payment_address'] ) . '</code>';
-    } else {
-        echo '-';
-    }
-    echo '</p>';
-
-    echo '<p><strong>' . esc_html__( 'Currency / Network', 'upos-woocommerce' ) . ':</strong> ';
-    if ( ! empty( $meta['payment_currency'] ) ) {
-        echo esc_html( strtoupper( $meta['payment_currency'] ) ) . ' / ' . esc_html( strtoupper( $meta['payment_network'] ?? '-' ) );
-    } else {
-        echo '-';
-    }
-    echo '</p>';
-
-    // Amounts
-    echo '<hr style="margin: 10px 0; border-color: #eee;">';
-
-    // Order Amount (Original)
-    echo '<p><strong>' . esc_html__( 'Order Amount', 'upos-woocommerce' ) . ':</strong> ';
-    echo esc_html( $meta['order_amount'] ?? '0' ) . '</p>';
-
-    // Buyer Fee
     if ( ! empty( $meta['buyer_fee'] ) && floatval( $meta['buyer_fee'] ) > 0 ) {
         echo '<p><strong>' . esc_html__( 'Buyer Fee', 'upos-woocommerce' ) . ':</strong> ';
         echo esc_html( $meta['buyer_fee'] ) . '</p>';
     }
 
-    // Payment Amount (Total)
-    echo '<p><strong>' . esc_html__( 'Payment Amount', 'upos-woocommerce' ) . ':</strong> ';
-    echo esc_html( $meta['payment_amount'] ?? '0' ) . '</p>';
+    echo '<p><strong>' . esc_html__('Product Price', 'upos-woocommerce') . ':</strong> ';
+    echo esc_html($meta['subtotal_amount'] ?? '0') . '</p>';
 
-    echo '<p><strong>' . esc_html__( 'Received Amount', 'upos-woocommerce' ) . ':</strong> ';
-    echo esc_html( $meta['received_amount'] ?? '0' ) . '</p>';
-
-    // Seller Fee
-    if ( ! empty( $meta['seller_fee'] ) && floatval( $meta['seller_fee'] ) > 0 ) {
-        echo '<hr style="margin: 5px 0; border-color: #eee; border-style: dashed;">';
+    if (!empty($meta['seller_fee']) && floatval($meta['seller_fee']) > 0) {
         echo '<p><strong>' . esc_html__( 'Seller Fee', 'upos-woocommerce' ) . ':</strong> ';
         echo esc_html( $meta['seller_fee'] ) . '</p>';
     }
 
-    // Net Amount
     if ( ! empty( $meta['net_amount'] ) ) {
-        echo '<p><strong>' . esc_html__( 'Net Amount', 'upos-woocommerce' ) . ':</strong> ';
+      echo '<p><strong>' . esc_html__('Merchant Receivable', 'upos-woocommerce') . ':</strong> ';
         echo esc_html( $meta['net_amount'] ) . '</p>';
     }
 
-    // Disbursed Amount
-    echo '<hr style="margin: 5px 0; border-color: #eee; border-style: dashed;">';
+    echo '<p><strong>' . esc_html__('Current Received', 'upos-woocommerce') . ':</strong> ';
+    echo esc_html($meta['received_amount'] ?? '0') . '</p>';
+
     echo '<p><strong>' . esc_html__( 'Disbursed Amount', 'upos-woocommerce' ) . ':</strong> ';
     echo esc_html( $meta['disbursed_amount'] ?? '0' ) . '</p>';
 
-    // Timestamps
     echo '<hr style="margin: 10px 0; border-color: #eee;">';
 
-    echo '<p><strong>' . esc_html__( 'Expires At', 'upos-woocommerce' ) . ':</strong><br>';
+    echo '<p><strong>' . esc_html__('Payment Type', 'upos-woocommerce') . ':</strong> ';
+    if (!empty($meta['payment_currency'])) {
+      echo esc_html(strtoupper($meta['payment_currency'])) . ' / ' . esc_html(strtoupper($meta['payment_network'] ?? '-'));
+    } else {
+      echo '-';
+    }
+    echo '</p>';
+
+    echo '<p><strong>' . esc_html__('Payment Address', 'upos-woocommerce') . ':</strong><br>';
+    if (!empty($meta['payment_address'])) {
+      echo '<code style="word-break:break-all;">' . esc_html($meta['payment_address']) . '</code>';
+    } else {
+      echo '-';
+    }
+    echo '</p>';
+
+    echo '<hr style="margin: 10px 0; border-color: #eee;">';
+
+    echo '<p><strong>' . esc_html__('Expired At', 'upos-woocommerce') . ':</strong><br>';
     echo esc_html( $fmt_date( $meta['expired_at'] ?? 0 ) ) . '</p>';
 
     echo '<p><strong>' . esc_html__( 'Paid At', 'upos-woocommerce' ) . ':</strong><br>';
     echo esc_html( $fmt_date( $meta['paid_at'] ?? 0 ) ) . '</p>';
 
-    echo '<p><strong>' . esc_html__( 'Last Disbursed At', 'upos-woocommerce' ) . ':</strong><br>';
+    echo '<p><strong>' . esc_html__('Disbursed At', 'upos-woocommerce') . ':</strong><br>';
     echo esc_html( $fmt_date( $meta['disbursed_at'] ?? 0 ) ) . '</p>';
-
+ 
     // Sync Button (Manual Trigger)
     echo '<hr style="margin: 10px 0; border-color: #eee;">';
     $sync_url = wp_nonce_url(
@@ -650,61 +634,61 @@ class UPOS_Gateway extends WC_Payment_Gateway {
     $events = ! empty( $events_json ) ? json_decode( $events_json, true ) : array();
 
     if ( ! empty( $events ) && is_array( $events ) ) {
-        // Scrollable Container
-        echo '<div style="border: 1px solid #ccd0d4; background: #fff; max-height: 200px; overflow-y: auto; margin-top: 5px;">';
-        echo '<ul style="margin: 0; padding: 0; list-style: none;">';
+      // Scrollable Container
+      echo '<div style="border: 1px solid #ccd0d4; background: #fff; max-height: 200px; overflow-y: auto; margin-top: 5px;">';
+      echo '<ul style="margin: 0; padding: 0; list-style: none;">';
 
-        // Sort events by date desc
-        usort( $events, function($a, $b) {
-            $t_a = $a['timestamp'] ?? $a['createdAt'] ?? 0;
-            $t_b = $b['timestamp'] ?? $b['createdAt'] ?? 0;
-            return $t_b - $t_a;
-        });
+      // Sort events by date desc
+      usort($events, function ($a, $b) {
+        $t_a = $a['timestamp'] ?? $a['createdAt'] ?? 0;
+        $t_b = $b['timestamp'] ?? $b['createdAt'] ?? 0;
+        return $t_b - $t_a;
+      });
 
-        foreach ( $events as $event ) {
-          $date = $fmt_date( $event['timestamp'] ?? $event['createdAt'] ?? 0 );
-          $type = $event['type'] ?? '-';
+      foreach ($events as $event) {
+        $date = $fmt_date($event['timestamp'] ?? $event['createdAt'] ?? 0);
+        $type = $event['type'] ?? '-';
 
-          // Status Text
-          $status_text = $event['status'] ?? '-';
-          if ( ! empty( $event['direction'] ) ) {
-              $status_text .= ' (' . $event['direction'] . ')';
-          }
-
-          // Amount
-          $amount = isset( $event['amount'] ) ? $event['amount'] . ' ' . strtoupper( $event['currency'] ?? '' ) : '-';
-
-          // TX Details
-          $tx_html = '';
-          $externalId = $event['externalId'] ?? '';
-          if ( ! empty( $externalId ) ) {
-            $tx_html = '<div style="font-size: 10px; color: #666; margin-top: 2px;">Tx: <span style="font-family: monospace; word-break: break-all;">' . esc_html( $externalId ) . '</span></div>';
-          }
-
-          // Render Item
-          echo '<li style="padding: 8px 10px; border-bottom: 1px solid #f0f0f1;">';
-
-          // Row 1: Date & Type
-          echo '<div style="display: flex; justify-content: space-between; font-size: 11px; color: #50575e; margin-bottom: 4px;">';
-          echo '<span>' . esc_html( $date ) . '</span>';
-          echo '<span style="font-weight: 600; color: #2271b1;">' . esc_html( ucfirst( $type ) ) . '</span>';
-          echo '</div>';
-
-          // Row 2: Status & Amount
-          echo '<div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;">';
-          echo '<span style="color: #1d2327;">' . esc_html( $status_text ) . '</span>';
-          echo '<strong style="color: #1d2327;">' . esc_html( $amount ) . '</strong>';
-          echo '</div>';
-
-          // Row 3: Tx ID
-          echo $tx_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-          echo '</li>';
+        // Status Text
+        $status_text = $event['status'] ?? '-';
+        if (!empty($event['direction'])) {
+          $status_text .= ' (' . $event['direction'] . ')';
         }
-        echo '</ul>';
+
+        // Amount
+        $amount = isset($event['amount']) ? $event['amount'] . ' ' . strtoupper($event['currency'] ?? '') : '-';
+
+        // TX Details
+        $tx_html = '';
+        $externalId = $event['externalId'] ?? '';
+        if (!empty($externalId)) {
+          $tx_html = '<div style="font-size: 10px; color: #666; margin-top: 2px;">' . esc_html__('Tx', 'upos-woocommerce') . ': <span style="font-family: monospace; word-break: break-all;">' . esc_html($externalId) . '</span></div>';
+        }
+
+        // Render Item
+        echo '<li style="padding: 8px 10px; border-bottom: 1px solid #f0f0f1;">';
+
+        // Row 1: Date & Type
+        echo '<div style="display: flex; justify-content: space-between; font-size: 11px; color: #50575e; margin-bottom: 4px;">';
+        echo '<span>' . esc_html($date) . '</span>';
+        echo '<span style="font-weight: 600; color: #2271b1;">' . esc_html(ucfirst($type)) . '</span>';
         echo '</div>';
+
+        // Row 2: Status & Amount
+        echo '<div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;">';
+        echo '<span style="color: #1d2327;">' . esc_html($status_text) . '</span>';
+        echo '<strong style="color: #1d2327;">' . esc_html($amount) . '</strong>';
+        echo '</div>';
+
+        // Row 3: Tx ID
+        echo $tx_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+        echo '</li>';
+      }
+      echo '</ul>';
+      echo '</div>';
     } else {
-        echo '<p class="description" style="margin-top:5px;">-</p>';
+      echo '<p class="description" style="margin-top:5px;">-</p>';
     }
 
     echo '</div>';

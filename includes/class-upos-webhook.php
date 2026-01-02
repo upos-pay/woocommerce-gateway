@@ -30,7 +30,10 @@ defined( 'ABSPATH' ) || exit;
  *   "data": {
  *     "id": "pi_xxx",
  *     "orderId": "123",
- *     "orderAmount": "100.00",
+ *     "requestAmount": "100.00",
+ *     "requestCurrency": "USDT",
+ *     "exchangeRate": "1.00",
+ *     "subtotalAmount": "100.00",
  *     "paymentAmount": "102.00",
  *     "receivedAmount": "100.00",
  *     "status": "paid",

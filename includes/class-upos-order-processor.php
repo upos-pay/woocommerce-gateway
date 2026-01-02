@@ -43,31 +43,38 @@ class UPOS_Order_Processor {
 				throw new Exception( __( 'Please select a payment network', 'upos-woocommerce' ) );
 			}
 
-			// --- Exchange Rate Conversion ---
-			// Only proceed with crypto payment if the selected currency is USDT (for now)
-			if ( 'usdt' !== strtolower( $currency ) ) {
-				throw new Exception( __( 'Currently only USDT is supported for crypto payment.', 'upos-woocommerce' ) );
-			}
 
-			$order_total_fiat    = (float) $order->get_total();
+			$order_total_fiat = $order->get_total(); // float/string
 			$order_currency_fiat = $order->get_currency();
 
-			// Get USDT exchange rate against the order's fiat currency
-			$exchange_rate = UPOS_Exchange::get_usdt_rate( $order_currency_fiat );
+			$request_currency = 'USDT';
+			$request_amount = '';
 
-			if ( false === $exchange_rate ) {
-				UPOS_Logger::error( 'Failed to get USDT exchange rate for ' . $order_currency_fiat );
-				throw new Exception( __( 'Unable to get exchange rate for payment. Please try again later.', 'upos-woocommerce' ) );
+			if (strtoupper($order_currency_fiat) === 'USDT') {
+				$request_amount = $order_total_fiat;
+				UPOS_Order_Meta::set($order, 'exchange_rate', '1.0');
+			} else {
+				// Convert EVERYTHING else (including USD) to USDT
+				$rate = UPOS_Exchange::get_usdt_rate($order_currency_fiat);
+
+				if (!$rate || $rate <= 0) {
+					UPOS_Logger::error('Failed to get exchange rate for ' . $order_currency_fiat);
+					throw new Exception(__('Unable to process payment currency conversion. Please try again later.', 'upos-woocommerce'));
+				}
+
+				$request_amount = bcdiv((string) $order_total_fiat, (string) $rate, 6);
+
+				UPOS_Order_Meta::set($order, 'exchange_rate', $rate);
 			}
 
-			// Calculate converted USDT amount
-			$converted_usdt_amount = bcdiv( (string) $order_total_fiat, (string) $exchange_rate, 6 );
+			// Round up to 2 decimal places
+			// e.g. 10.331 -> 10.34, 10.330 -> 10.33
+			$request_amount = bcdiv( (string) ceil( (float) bcmul( (string) $request_amount, '100', 4 ) ), '100', 2 );
 
-			// Store fiat details and exchange rate in order meta
+			// Store fiat details in order meta (original order total)
 			UPOS_Order_Meta::set( $order, 'fiat_amount', $order_total_fiat );
 			UPOS_Order_Meta::set( $order, 'fiat_currency', $order_currency_fiat );
-			UPOS_Order_Meta::set( $order, 'exchange_rate', $exchange_rate );
-			// --- End Exchange Rate Conversion ---
+
 
 			// Build payment method object
 			$payment_method_type = 'crypto_' . strtolower( $network );
@@ -77,7 +84,8 @@ class UPOS_Order_Processor {
 			$response = $api->create_payment_intent(
 				array(
 					'orderId'       => (string) $order->get_order_number(),
-					'amount'        => (string) $converted_usdt_amount,
+					'currency' => (string) $request_currency,
+					'amount' => (string) $request_amount,
 					'paymentMethod' => array(
 						'type'     => $payment_method_type,
 						'currency' => strtolower( $currency ),
@@ -110,7 +118,7 @@ class UPOS_Order_Processor {
 
 			// Process initial status
 			$status = $response['intent']['status'] ?? UPOS_Constants::STATUS_CREATED;
-			$initial_amount = $response['intent']['paymentAmount'] ?? $converted_usdt_amount;
+			$initial_amount = $response['intent']['paymentAmount'] ?? $request_amount; // Fallback to request amount if paymentAmount missing (unlikely)
 			UPOS_Order_FSM::process_status_change( $order, $status, $initial_amount, 0, null );
 
 			$order->save();
