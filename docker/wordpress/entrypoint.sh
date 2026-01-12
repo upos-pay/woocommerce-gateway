@@ -18,13 +18,28 @@ sleep 15
 if ! wp core is-installed --allow-root 2>/dev/null; then
     echo "Installing WordPress..."
     wp core install \
-        --url="http://localhost:8088" \
+        --url="http://localhost" \
         --title="UPOS Development" \
         --admin_user="admin" \
         --admin_password="admin" \
         --admin_email="admin@example.com" \
         --skip-email \
         --allow-root
+fi
+
+# Enable dynamic URL support (allows access via SSH tunnel or custom domains)
+if ! grep -q "WP_HOME" /var/www/html/wp-config.php 2>/dev/null; then
+    echo "Enabling dynamic URL support..."
+    sed -i "/^require_once ABSPATH/i \
+/** Dynamic URL support for dev environments */\n\
+if (isset(\\\$_SERVER['HTTP_X_FORWARDED_PROTO']) \&\& \\\$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {\n\
+    \\\$_SERVER['HTTPS'] = 'on';\n\
+}\n\
+\\\$http_protocol = isset(\\\$_SERVER['HTTPS']) \&\& \\\$_SERVER['HTTPS'] === 'on' ? 'https' : 'http';\n\
+define('WP_HOME', \\\$http_protocol . '://' . \\\$_SERVER['HTTP_HOST']);\n\
+define('WP_SITEURL', \\\$http_protocol . '://' . \\\$_SERVER['HTTP_HOST']);\n\
+define('RELOCATE', true); /* Disable strict URL checking */\n\
+" /var/www/html/wp-config.php
 fi
 
 # Install and activate WooCommerce if not already
@@ -66,7 +81,7 @@ fi
 wp option update mail_from "wordpress@localhost" --allow-root 2>/dev/null || true
 
 echo "WordPress setup complete!"
-echo "Admin URL: http://localhost:8088/wp-admin"
+echo "Admin URL: http://localhost/wp-admin (or your custom domain)"
 echo "Username: admin"
 echo "Password: admin"
 
